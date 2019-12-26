@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>{% print coursetitle %}</title>
+
+<meta name="Template for Examinations" content="">
+<meta name="author" content="Jacky Baltes">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Math ML polyfill
+<script src="http://fred-wang.github.io/mathjax.js/mpadded-min.js"></script>
+
+<script>
+ function hasMathMLSupport() {
+  var div = document.createElement("div"), box;
+  div.innerHTML = "<math><mspace height='23px' width='77px'/></math>";
+  document.body.appendChild(div);
+  box = div.firstChild.firstChild.getBoundingClientRect();
+  document.body.removeChild(div);
+  return Math.abs(box.height - 23) <= 1  && Math.abs(box.width - 77) <= 1;
+}
+
+(function(){window.addEventListener("load",function(){var a,b;if(document.body.getElementsByTagNameNS("http://www.w3.org/1998/Math/MathML","math")[0]&&(document.body.insertAdjacentHTML("afterbegin","<div style='border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px;'><math xmlns='http://www.w3.org/1998/Math/MathML'><mpadded height='23px' width='77px'></mpadded></math></div>"),b=document.body.firstChild,a=b.firstChild.firstChild.getBoundingClientRect(),
+document.body.removeChild(b),1<Math.abs(a.height-23)||1<Math.abs(a.width-77)))a=document.createElement("script"),a.src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML",document.head.appendChild(a)})})();
+</script>
+
+<style>
+@namespace url('http://www.w3.org/1999/xhtml');
+@namespace m url('http://www.w3.org/1998/Math/MathML');
+
+body, m|mtext {
+    font-family: Latin Modern;
+}
+m|math {
+    font-family: Latin Modern Math;
+}
+</style>
+-->
+
+<!-- <link rel="stylesheet" href="file://{% print templateDir %}/exam_template.css" type="text/css"> -->
+<style>
+    {{styles}}
+</style>
+<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame Remove this if you use the .htaccess --><!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+</head>
+<body onload="showHideAnswers()">
+<script type="text/javascript">
+var showAnswers = true;
+
+function showHideAnswers( el ) {
+   showAnswers = ! showAnswers;
+   el = document.getElementById('showhideanswersbox');
+   if ( showAnswers ) {
+      el.innerHTML = "With Answers";
+   } else {
+      el.innerHTML = "Without Answers";
+   }
+   var answers = document.getElementsByClassName('questionanswer');
+   var length = answers.length;
+   var element = null;
+   for (var i = 0; i < length; i++) {
+      element = answers[i];
+      if ( showAnswers ) {
+         element.style.display = "block";
+      } else {
+         element.style.display = "none";
+      }
+   }
+}
+</script>
+<div ondblclick="showHideAnswers()" id="showhideanswersbox">With Answers</div>
+<div class="university">{{ university }}<br>
+{{examtype}}
+</div>
+<br>
+<div class="subtitle">{{coursetitle}}</div>
+<br style="font-weight: bold;">
+<table style="width: 600px; height: 160px; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="1" cellspacing="2">
+<tbody>
+<tr>
+<td style="font-weight: bold; width: 100px;">Examiners:</td>
+<td>{{examiners}}</td>
+</tr>
+<tr>
+<td style="font-weight: bold;">Date:</td>
+<td>{{date}}</td>
+</tr>
+<tr>
+<td style="font-weight: bold;">Time:</td>
+<td>{{time}}</td>
+</tr>
+<tr>
+<td style="font-weight: bold;">Room:</td>
+<td>{{room}}<span style="text-decoration: underline;"><br>
+</span></td>
+</tr>
+</tbody>
+</table>
+<br>
+<table style="width: 600px; height: 100px; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="1" cellspacing="2">
+<tbody>
+<tr>
+<th style="vertical-align: top; height: 100px; width: 100px;">Note:</th>
+<td class="note" style="vertical-align: top; height: 100px; width: 500px;">{% print note %}</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table style="width: 600px; height: 160px; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="1" cellspacing="2">
+<tbody>
+<tr>
+<td style="font-weight: bold; width: 100px;">Last
+Name:</td>
+<td><span style="text-decoration: underline;">
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></td>
+</tr>
+<tr>
+<td style="font-weight: bold;">First Name:</td>
+<td><span style="text-decoration: underline;">
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></td>
+</tr>
+<tr>
+<td style="font-weight: bold;">Student ID:</td>
+<td><span style="text-decoration: underline;">
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></td>
+</tr>
+</tbody>
+</table>
+<br>
+{% print questionbox %}
+<br>
+<hr style="width: 100%; height: 2px;">
+
+{% print content %}
+
+</body></html>

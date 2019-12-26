@@ -1,0 +1,115 @@
+.header {
+    font-size: 12pt;
+    text-align: right;
+}
+.university {
+    font-size: 24pt;
+    font-weight: bold;
+    text-align: center;
+}
+.subtitle {
+    font-size: 24pt;
+    text-align: center;
+}
+.note {
+    font-size: 12pt;
+    font-style: italic;
+}
+
+.sectionheader {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 18pt;
+    font-weight: bold;
+    text-align: center;
+    list-style-type: decimal;
+}
+
+.questionbody {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    text-align: left;
+}
+
+.questionanswer {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    text-align: left;
+    background: #e1e1e1;
+}
+
+.questionanswerbox {
+    position: relative;
+    font-family: "Times New Roman", Times, serif;
+    border-style: solid;
+    border-color: red;
+    page-break-inside: avoid;
+    min-height: 5cm;
+}
+
+.programbox {
+    font-family: "Courier New", Courier, sans-serif;
+    border-style: solid;
+}
+.qbox_cell {
+    text-align: center;
+    height: 50px;
+    width: 30px;
+}
+
+.break {
+    page-break-before:always;
+}
+
+.centeredimage {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+
+#showhideanswersbox {
+    font-size: 20pt;
+    font-weight: italic;
+    text-align: center;
+    background-color: yellow;
+    width : 5cm;
+    height: 3cm;
+    position: absolute;
+    top: 0.5cm;
+    right: 0;
+    z-index: 10;
+}
+
+.vcentrehelper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.emph1 {
+    font-weight:bold;
+}
+
+@media print {
+	#showhideanswersbox {
+		display: none;
+	}
+
+    body{
+        width: 21cm;
+        height: 29.7cm;
+        margin: 30mm 45mm 30mm 45mm; 
+        /* change the margins as you want them to be. */
+   } 
+   
+    .questionanswerbox {
+        position: relative;
+        font-family: "Times New Roman", Times, serif;
+        border-style: solid;
+        border-color: black;
+        page-break-inside: avoid;
+        min-height: 5cm;
+    }
+
+}
+
