@@ -18,19 +18,6 @@ UNIVERSITY = 'NTNU'
 
 EXAMTITLE = COURSE + ' - ' + EXAMTYPE  + ' - ' + UNIVERSITY + ' - ' + str(YEAR)
 
-vars = {
-    'NTNU-ERC' : { 'ROOTDIR': 'D:/OneDrive - dkclauson003/OneDrive/Machine Learning/' + EXAMTITLE,
-                   'EXAMDIR': 'D:/OneDrive - dkclauson003/OneDrive/Examinations',
-               }, 
-    'I157000': { 'ROOTDIR': 'C:/Users/mrkwss007/OneDrive/SharedWithAliases/Documents/Teaching/Courses/Machine Learning/' + EXAMTITLE,
-                 'EXAMDIR': 'C:/Users/mrkwss007/OneDrive/SharedWithAliases/Documents/Teaching/Examinations',
-               },
-    'DESKTOP-1N7BG4A' : {
-                'ROOTDIR': 'D:/OneDrive - negrin006/OneDrive/Machine Learning/' + EXAMTITLE,
-                'EXAMDIR': 'D:/OneDrive - negrin006/OneDrive/Examinations',
-    }
-}
-
 host = os.getenv('HOSTNAME', os.getenv('COMPUTERNAME', platform.node())).split('.')[0]
 
 paths = vars[host]
