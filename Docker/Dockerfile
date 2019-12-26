@@ -4,4 +4,3 @@ RUN apt update && apt --fix-missing --yes dist-upgrade; \
     apt install -y npm; \
     /opt/conda/bin/conda upgrade --yes conda; \ 
     /opt/conda/bin/conda upgrade --yes anaconda; \
-     
