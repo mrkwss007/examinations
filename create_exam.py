@@ -5,7 +5,7 @@ import argparse
 import importlib
 import codecs
 import builtins
-from pathlib import Path
+import pathlib
 
 args = None
 
@@ -23,7 +23,7 @@ def main( argv = None ):
     parser.add_argument('-s', '--styles', metavar='S', default=DEFAULT_TEMPLATE_DIR + '/' + 'exam_template.css', help='CSS styles')
     args = parser.parse_args(argv)
 
-    homeDir = Path( args.exam ).parent.resolve()
+    homeDir = pathlib.Path( args.exam ).parent.resolve()
     print('*** HOME ***', str(homeDir), '*** exam ***', args.exam )
     dirs = [ homeDir ]
 
@@ -39,7 +39,7 @@ def main( argv = None ):
         if dn not in dirs:
             dirs.append(dn)
 
-    #print('Appending dirs', dirs)
+    print('Appending dirs', dirs)
     for d in dirs:
         sys.path.append( str(d) )
 
@@ -56,7 +56,7 @@ def main( argv = None ):
 
     #print(args.exam)
     #print(sys.path)
-    exp = Path( args.exam )
+    exp = pathlib.Path( args.exam )
     if (exp.suffix == '.py'):
         pass
         
@@ -65,8 +65,8 @@ def main( argv = None ):
     ### Epilog to create the exam. Do not change.
 
     c = ex.CreateExam( ex.exam, args.template_dir, 'exam_template.html', args.styles )
-    base = Path( args.exam ).name[0:-3]
-    saveFileName = Path(base + '_out.html')
+    base = pathlib.Path( args.exam ).name[0:-3]
+    saveFileName = pathlib.Path(base + '_out.html')
     with codecs.open(saveFileName,"w","utf-8") as f:
         f.write( c ) 
 
