@@ -20,8 +20,6 @@ EXAMTITLE = COURSE + ' - ' + EXAMTYPE  + ' - ' + UNIVERSITY + ' - ' + str(YEAR)
 
 host = os.getenv('HOSTNAME', os.getenv('COMPUTERNAME', platform.node())).split('.')[0]
 
-paths = vars[host]
-
 ROOTDIR = Path( paths['ROOTDIR'] )
 EXAMDIR = Path( paths['EXAMDIR'] )
 
