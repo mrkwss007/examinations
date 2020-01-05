@@ -277,6 +277,7 @@ def mergeDictionaries(*dict_args):
 
 def CreateExam( exam, templateDir, templateFilename, styleFile ):
     template_args = exam.values
+    print('***', 'exam.values', exam.values)
     if "note" not in template_args:
         template_args['note'] = """
 Attempt all questions.<br>

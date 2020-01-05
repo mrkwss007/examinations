@@ -6,10 +6,9 @@ import importlib
 import codecs
 import builtins
 import pathlib
+import json
 
 args = None
-
-DEFAULT_TEMPLATE_DIR = 'C:/Users/yuihjk003/SkyDrive/Documents/Teaching/Templates'
 
 def main( argv = None ):
     if argv == None:
@@ -19,8 +18,9 @@ def main( argv = None ):
     parser.add_argument('exam', default='exam.py', nargs='?', help='Examination file (a python script that will be imported into the current python context')
     parser.add_argument('-v', '--verbose', action='count', default=0, help='increase verbosity level')
     parser.add_argument('-r', '--resource_dir', metavar='R', nargs='+', action = 'append', help='Additional directories to search for questions')
-    parser.add_argument('-t', '--template_dir', metavar='T', default=DEFAULT_TEMPLATE_DIR, help='Additional directories for moody templates')
-    parser.add_argument('-s', '--styles', metavar='S', default=DEFAULT_TEMPLATE_DIR + '/' + 'exam_template.css', help='CSS styles')
+    parser.add_argument('-t', '--template_dir', metavar='T', default="examinations/Templates", help='Additional directories for moody templates')
+    parser.add_argument('-s', '--styles', metavar='S', default='examinations/Templates/exam_template.css', help='CSS styles')
+    parser.add_argument('--values', help="json dump of the variables")
     args = parser.parse_args(argv)
 
     homeDir = pathlib.Path( args.exam ).parent.resolve()
@@ -64,6 +64,7 @@ def main( argv = None ):
 
     ### Epilog to create the exam. Do not change.
 
+    ex.exam.values = json.loads( args.values )
     c = ex.CreateExam( ex.exam, args.template_dir, 'exam_template.html', args.styles )
     base = pathlib.Path( args.exam ).name[0:-3]
     saveFileName = pathlib.Path(base + '_out.html')
