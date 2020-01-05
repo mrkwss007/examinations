@@ -391,7 +391,7 @@ def array2DToString( arr, fmt = '{0}' ):
 def createSVGFromGraphviz( graph, format='svg' ):
     graph.format = 'svg'
     s = graph.pipe().decode('utf-8')
-    graph.save('bbn1_out.svg')
+    #graph.save('bbn1_out.svg')
     return s
 
 def createBase64ImageFromFigure( fig ):
@@ -412,6 +412,17 @@ def createSVGImageFromFigure( fig ):
     figfile.seek(0)  # rewind to beginning of file
     image = figfile.getvalue().decode('utf-8')
     return image
+
+def svgAdjust( svg, width, height, rotate = False ):
+    #print("svgAdjust", svg[0:300], width, height )
+    sizeRE = r'width=\w*"([^"]+)" height="([^"]+)"' # ([^"]*)"\w+height="(.*)"' #\w+height="(?P<height>[^"]+)"'
+    svg = re.sub( sizeRE, f'width="{width}%" height="{height}"', svg )
+
+    if rotate:
+        rotRE = r''
+
+    print(svg[0:400])
+    return svg
 
 if __name__ == '__main__':
     main()
