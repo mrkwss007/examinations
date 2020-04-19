@@ -7,10 +7,11 @@ import subprocess
 import os
 import json
 
-GIT_CMD="git"
+GIT_CMD = "git"
 
 class cd:
     """Context manager for changing the current working directory"""
+
     def __init__(self, newPath):
         self.newPath = pathlib.Path(newPath).expanduser().resolve()
 
@@ -21,33 +22,35 @@ class cd:
     def __exit__(self, etype, value, traceback):
         os.chdir(self.savedPath)
 
-def updateGit( url, branch,  root ):
-    dirStart = url.rfind("/")    
-    dirname=url[dirStart+1:-4]
 
-    with cd( root ):
-        p = pathlib.Path( dirname )
-        if ( branch ):
+def updateGit(url, branch, root):
+    dirStart = url.rfind("/")
+    dirname = url[dirStart + 1:-4]
+
+    with cd(root):
+        p = pathlib.Path(dirname)
+        if (branch):
             bs = " --branch " + branch
         else:
             bs = ""
         if not p.is_dir():
-            print("cloning {0} from url {1} root {2}".format( dirname, url, root ), 'git command', GIT_CMD)
-                
-            cmd = GIT_CMD + " clone " + bs + " " + url + " " + dirname 
-            os.system( cmd )
+            print("cloning {0} from url {1} root {2}".format(dirname, url, root), 'git command', GIT_CMD)
+
+            cmd = GIT_CMD + " clone " + bs + " " + url + " " + dirname
+            os.system(cmd)
         else:
             print("git directory exists")
 
-        with cd( dirname ):
+        with cd(dirname):
             print("Executing git pull")
             o = None
             try:
                 o = subprocess.check_output(GIT_CMD + " pull", shell=True)
             except subprocess.CalledProcessError:
                 pass
-            if ( o ):
-                print( 'git pull:' + o.decode('utf-8') )
+            if (o):
+                print('git pull:' + o.decode('utf-8'))
+
 
 f = pathlib.Path(__file__)
 d = f.parent.resolve()
@@ -56,11 +59,12 @@ COURSE, EXAMTYPE, UNIVERSITY, YEAR = d.name.split(' - ')
 
 HOME = pathlib.Path.home()
 
-EXAMTITLE = " - ".join( [ COURSE, EXAMTYPE, UNIVERSITY, YEAR ] )
+EXAMTITLE = " - ".join([COURSE, EXAMTYPE, UNIVERSITY, YEAR])
 
+# EXAMDIR = pathlib.Path("/usr/local/") / "examinations"
+EXAMDIR = pathlib.Path(".") / "examinations"
 ROOTDIR = pathlib.Path(".")
-updateGit( "http://www.github.com/mrkwss007/examinations.git", "master", ROOTDIR )
-EXAMDIR = ROOTDIR / "examinations"
+updateGit("http://www.github.com/mrkwss007/examinations.git", "master", EXAMDIR.parent )
 
 TEMPLATE = EXAMDIR / 'Templates'
 CODEDIR = ROOTDIR / 'Code'
@@ -87,19 +91,19 @@ Some of the questions may not be solvable, that is it may be impossible to calcu
 """
 }
 
-cmd = [ sys.executable,
-        str(EXAMDIR / 'create_exam.py'),
-        '-v',
-        '-v',
-        str(EXAMTITLE) + '.py',
-        '--template_dir', str(TEMPLATE),
-        '--resource_dir', str(ROOTDIR / 'Code'), 
-        '--resource_dir', str(PARENT / 'Code'), 
-        '--resource_dir', str(ROOTDIR / 'Questions'), 
-        '--resource_dir', str(PARENT / 'Questions'), 
-        '--styles', str( TEMPLATE / 'exam_template.css' ),
-        '--values', json.dumps( values )
-]
+cmd = [sys.executable,
+       str(EXAMDIR / 'create_exam.py'),
+       '-v',
+       '-v',
+       str(EXAMTITLE) + '.py',
+       '--template_dir', str(TEMPLATE),
+       '--resource_dir', str(ROOTDIR / 'Code'),
+       '--resource_dir', str(PARENT / 'Code'),
+       '--resource_dir', str(ROOTDIR / 'Questions'),
+       '--resource_dir', str(PARENT / 'Questions'),
+       '--styles', str(TEMPLATE / 'exam_template.css'),
+       '--values', json.dumps(values)
+       ]
 
 print('Executing command', cmd)
-subprocess.call( cmd )
+subprocess.call(cmd)
